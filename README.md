@@ -2,4 +2,4 @@
 ## Este es un subtitulo
 
 
-Ya vine a arreglar tu README
+Ya vine a arreglar tu READ
