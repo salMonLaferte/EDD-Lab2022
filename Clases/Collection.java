@@ -16,35 +16,33 @@ public interface Collection<T> {
     // size
     public int size();
 
+    // contiene
+    public boolean contains(T elemento);
+
     // empty
     public void empty();
+
+    // is empty
+    public boolean isEmpty();
+    
+    // equals
+    public boolean equals(Collection<T> object);
 
     // append
     public void append(Collection<T> elemento);
 
-    // equals
-    public boolean equals(Collection<T> object);
-
     // to string
     public String toString();
-
-    // is empty
-    public boolean isEmpty();
-
-    // Sort
-    // TODO Interfaz ...Comparator
-    //public void sort(Comparator<T> c);
-
-    // contiene
-    public boolean contains(T elemento);
-
+    
     // reverse
     public void reverse();
 
     // clone
     public Collection<T> clone();
 
-    //Todos van a ser public?
+    // Sort
+    // TODO Interfaz ...Comparator
+    // public void sort(Comparator<T> c)
 
 
 }
