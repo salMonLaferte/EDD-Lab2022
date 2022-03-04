@@ -337,9 +337,9 @@ public class Lista<T> implements Collection<T> {
      * @throws IllegalArgumentException si <code>elemento</code> es
      *                                  <code>null</code>.
      */
-    public int insert(int i, T elemento) {
+    public void insert(int i, T elemento) {
         // Tu codigo aqui
-        return 0;
+        return ;
     }
 
     // Tu comentario
