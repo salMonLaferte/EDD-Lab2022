@@ -1,5 +1,6 @@
 package Clases;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 // iterador
 //next
@@ -292,7 +293,7 @@ public class Lista<T> implements Collection<T> {
      */
     public String toString(){
         // Tu codigo aqui
-        //return "";
+        return "";
     }
 
     /**
@@ -337,9 +338,9 @@ public class Lista<T> implements Collection<T> {
      * @throws IllegalArgumentException si <code>elemento</code> es
      *                                  <code>null</code>.
      */
-    public int insert(int i, T elemento) {
+    public void insert(int i, T elemento) {
         // Tu codigo aqui
-        return 0;
+        return ;
     }
 
     // Tu comentario
@@ -347,4 +348,19 @@ public class Lista<T> implements Collection<T> {
         return;
     }
 
+    /**
+     * Regresa un iterador para recorrer la lista en una dirección.
+     * @return un iterador para recorrer la lista en una dirección.
+     */
+    public Iterator<T> iterator() {
+        return new Iterador();
+    }
+
+    /**
+     * Regresa un iterador para recorrer la lista en ambas direcciones.
+     * @return un iterador para recorrer la lista en ambas direcciones.
+     */
+    public IteradorLista<T> iteradorLista() {
+        return new Iterador();
+    }
 }
