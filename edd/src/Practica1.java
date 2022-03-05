@@ -36,7 +36,7 @@ public class Practica1 {
             primera.add(i);
         }
         
-        String test = "1 -> 2 -> 3 -> 4 -> 5";
+        String test = "0 -> 1 -> 2 -> 3 -> 4 -> 5";
         if (!primera.toString().equals(test)) {
             System.out.println("1 El toString no funciona!");
         }
