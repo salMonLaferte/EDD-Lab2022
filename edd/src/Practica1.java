@@ -1,6 +1,3 @@
-package Clases;
-
-import java.util.Iterator;
 
 public class Practica1 {
     
