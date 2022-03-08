@@ -327,6 +327,9 @@ public class Lista<T> implements Collection<T> {
      */
     public void append(Lista<T> lista) {
         // Tu codigo aqui
+        ultimo.siguiente = lista.cabeza;
+        ultimo = lista.ultimo;
+        longi += lista.longi;
         return ;
     }
 
@@ -342,8 +345,17 @@ public class Lista<T> implements Collection<T> {
      */
     public int indexOf(T elemento) {
         // Tu codigo aqui
+        if(cabeza == null)
+            return -1;
+        Nodo current = cabeza;
+        int count = 0;
+        while(current !=null){
+            if(elemento.equals(current.elemento))
+                return count;
+            count++;
+            current = current.siguiente;
+        }
         return 0;
-
     }
     
     /**
