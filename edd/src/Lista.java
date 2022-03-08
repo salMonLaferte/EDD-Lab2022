@@ -2,6 +2,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 // iterador
 //next
+import java.util.Stack;
 
 public class Lista<T> implements Collection<T> {
 
@@ -280,7 +281,24 @@ public class Lista<T> implements Collection<T> {
      */
     public void reverse() {
         // Tu codigo aqui
-        return ;
+        if( cabeza == null)
+            return;
+        Stack<Nodo> stack = new Stack<>();
+        Nodo current = cabeza;
+        while(current !=null){
+            stack.push(current);
+            current = current.siguiente;
+        }
+        cabeza = stack.peek();
+        current = cabeza;
+        stack.pop();
+        while( !stack.empty() ){
+            current.siguiente = stack.peek();
+            current = current.siguiente;
+            stack.pop();
+        }
+        current.siguiente = null;
+        ultimo = current;
     }
 
     /**
