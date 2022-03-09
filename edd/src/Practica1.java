@@ -1,4 +1,5 @@
-
+import java.util.Set;
+import java.util.HashSet;
 public class Practica1 {
     
 
@@ -9,11 +10,15 @@ public class Practica1 {
      * If nuevo is less than or equal to the first element it will be added at the beginning. 
      * If nuevo is greater than or equal to every other element of the list it will be added at the end.
      * if lista is ordered it will stay ordered after adding the new element.
+     * 
+     * Time complexity: Worst case is O(n) in which nuevo is inserted at the end of the list and is compared to
+     * every other element on the list.
+     * Space complexity is O(1) because lista is modified in-place and just an extra element for the lis is created.
      */
     public static Lista<Integer> AgregaOrdenado(Lista<Integer> lista, int nuevo) {
         if( lista.size() == 0)//if lista is empty, add nuevo
             lista.add(nuevo);
-        IteradorLista it = lista.iteradorLista();
+        IteradorLista<Integer> it = lista.iteradorLista();
         it.start();
         int previous = (int)it.next();//set previous to the first element of the list
         int count = 1;//set count to 1 to track the index of the iterator
@@ -52,8 +57,8 @@ public class Practica1 {
      * solo tenemos que construir una lista añadiendo cada elemento de s, lo cuál tambien se hace en O(n+m).
      */
     public static void Union(Lista<Integer> lista1,Lista<Integer> lista2) {
-        IteradorLista it2 = lista2.iteradorLista();
-        IteradorLista it1 = lista1.iteradorLista();
+        IteradorLista<Integer> it2 = lista2.iteradorLista();
+        IteradorLista<Integer> it1 = lista1.iteradorLista();
         it2.start();
         while(it2.hasNext()){//for every element on lista2
             int current = (int)it2.next();
@@ -73,9 +78,23 @@ public class Practica1 {
     }
 
     // Aqui va tu comentario
-    public static void Interseccion(Lista<Integer> lista,Lista<Integer> lista2) {
-        
-        return ;
+    private static void Interseccion(Lista<Integer> lista, Lista<Integer> lista2){
+        Set<Integer> s = new HashSet<>();
+        IteradorLista<Integer> it = lista.iteradorLista();
+        it.start();
+        while(it.hasNext()){
+            s.add((int)it.next());
+        }
+        it = lista2.iteradorLista();
+        it.start();
+        lista.empty();
+        while(it.hasNext()){
+            int current = (int)it.next();
+            if(s.contains(current)){
+                lista.add(current);
+            }
+        }
+        return;
     }
 
 
