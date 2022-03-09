@@ -4,7 +4,9 @@ public class Practica1 {
 
 
     /**
-     * 
+     * Adds the element nuevo to the list in the first index such that nuevo is greater or equal than
+     * every other element before and less or equal than the element after.
+     * if lista is ordered it will stay ordered after adding the new element.
      */
     public static Lista<Integer> AgregaOrdenado(Lista<Integer> lista, int nuevo) {
         //Tu codigo aqui
