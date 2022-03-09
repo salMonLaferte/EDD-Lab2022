@@ -4,19 +4,20 @@ public class Practica1 {
 
 
     /**
-     * Adds the element nuevo to the list in the first index such that nuevo is greater or equal than
-     * every other element before and less or equal than the element after.
+     * Adds the element nuevo to the list in the first index such that nuevo is greater than or equal to 
+     * every other element before and less than or equal to the element after. 
+     * If nuevo is less than or equal to the first element it will be added at the beginning. 
+     * If nuevo is greater than or equal to every other element of the list it will be added at the end.
      * if lista is ordered it will stay ordered after adding the new element.
      */
     public static Lista<Integer> AgregaOrdenado(Lista<Integer> lista, int nuevo) {
-        //Tu codigo aqui
         if( lista.size() == 0)//if lista is empty, add nuevo
             lista.add(nuevo);
         IteradorLista it = lista.iteradorLista();
         it.start();
         int previous = (int)it.next();//set previous to the first element of the list
         int count = 1;//set count to 1 to track the index of the iterator
-        if( nuevo <= previous ){// if nuevo is less than the first element add nuevo at the beginning
+        if( nuevo <= previous ){// if nuevo is less than or equal to the first element add nuevo at the beginning
             lista.agregaInicio(nuevo);
             return lista;
         }
@@ -37,11 +38,10 @@ public class Practica1 {
     /**
      * Performs union operation, lista1 is modified so it contains all the elements 
      * from lista1 and lista2 without repeated elements. 
-     * 
-     * lista2 is not modified.
-     * 
      * if lista1 contains repeated elements those elements will stay untouched, so in this case
      * the result will contain the repeated elements from lista1.
+     * 
+     * lista2 is not modified.
      * 
      * Respuesta a la pregunta de la práctica.
      * 
