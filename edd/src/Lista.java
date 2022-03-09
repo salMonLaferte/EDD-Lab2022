@@ -1,3 +1,4 @@
+import java.util.Currency;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 // iterador
@@ -283,20 +284,24 @@ public class Lista<T> implements Collection<T> {
         // Tu codigo aqui
         if( cabeza == null)
             return;
+        //Put the list elements on a stack so the first element is at the bottom and the last element is at the top
         Stack<Nodo> stack = new Stack<>();
         Nodo current = cabeza;
         while(current !=null){
             stack.push(current);
             current = current.siguiente;
         }
+        //Pop up the top element of the stack, which now is the head of the list
         cabeza = stack.peek();
         current = cabeza;
         stack.pop();
         while( !stack.empty() ){
+            //pop up the top element of the stack and set siguiente reference to the element at the top of the remaining stack 
             current.siguiente = stack.peek();
             current = current.siguiente;
             stack.pop();
         }
+        //set last element in the list to null, and ultimo to the last element of the list
         current.siguiente = null;
         ultimo = current;
     }
@@ -310,14 +315,15 @@ public class Lista<T> implements Collection<T> {
     public String toString(){
         // Tu codigo aqui
         String s = "";
-        if(cabeza == null)
+        if(cabeza == null)//if list is empty print an empty string
             return s;
         Nodo current = cabeza;
+        //Traverse the list until penultimate element and write every element to s
         while(current.siguiente != null){
             s += current.elemento.toString() + " -> "; 
             current = current.siguiente;
         }
-        s+= current.elemento.toString();
+        s+= current.elemento.toString(); //last element is added to s without an arrow
         return s;
     }
 
@@ -327,6 +333,8 @@ public class Lista<T> implements Collection<T> {
      */
     public void append(Lista<T> lista) {
         // Tu codigo aqui
+        if(lista == null || lista.longi == 0)//if list is null or empty don't do anything
+            return; 
         ultimo.siguiente = lista.cabeza;
         ultimo = lista.ultimo;
         longi += lista.longi;
@@ -345,17 +353,22 @@ public class Lista<T> implements Collection<T> {
      */
     public int indexOf(T elemento) {
         // Tu codigo aqui
-        if(cabeza == null)
+        if(elemento == null){
+            throw new IllegalArgumentException();
+        }
+        if(cabeza == null)//if list is empty return -1
             return -1;
         Nodo current = cabeza;
         int count = 0;
-        while(current !=null){
+        while(current !=null){//traverse the list
+            //if  current element is equal to elemento, return the index
             if(elemento.equals(current.elemento))
                 return count;
+            //else move to the next one
             count++;
             current = current.siguiente;
         }
-        return 0;
+        return -1;//if element is not found return -1
     }
     
     /**
@@ -377,11 +390,50 @@ public class Lista<T> implements Collection<T> {
      */
     public void insert(int i, T elemento) {
         // Tu codigo aqui
+        if(elemento==null)
+            throw new IllegalArgumentException();
+        Nodo node = new Nodo(elemento);
+        if(longi == 0){//handle the case when the list is empty
+            cabeza = node;
+            ultimo = node;
+            node.siguiente = null;
+        }
+        else if( i <= 0){//insert element at the beginning
+            node.siguiente = cabeza;
+            cabeza = node;
+        }
+        else if( i >= longi ){//insert element at the end
+            ultimo.siguiente = node;
+            ultimo = node;
+            node.siguiente = null;
+        }else{
+            int count = 0;
+            Nodo current = cabeza;
+            while ( count < i-1){//get the reference of the node prior to the position of insertion
+                current = current.siguiente;
+                count++;
+            }
+            Nodo remaining = current.siguiente;//keep a reference to the rest of the list
+            //insert node
+            current.siguiente = node;
+            node.siguiente = remaining;
+        }
+        longi++;
         return ;
     }
 
     // Tu comentario
     public void mezclaAlternada(Lista<T> lista){
+        Nodo current = cabeza;
+        while(lista.cabeza != null){
+            Nodo remainingRefA = current.siguiente;
+            current.siguiente = lista.cabeza;
+            Nodo remainingRefB = lista.cabeza.siguiente;
+            lista.cabeza.siguiente = remainingRefA;
+            lista.cabeza = remainingRefB;
+            lista.longi--;
+            current = remainingRefA;
+        }
         return;
     }
 
