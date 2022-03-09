@@ -436,7 +436,7 @@ public class Lista<T> implements Collection<T> {
         if(lista== null)
             return;
         Nodo current = cabeza;
-        while(lista.cabeza != null || current == null){//if lista cabeza is null we got out of nodes to add
+        while(lista.cabeza != null && current != null){//if lista cabeza is null we got out of nodes to add
             Nodo remainingRefA = current.siguiente;//keep a reference from the rest of THIS list
             current.siguiente = lista.cabeza;//point current element of THIS list to the cabeza element of lista
             Nodo remainingRefB = lista.cabeza.siguiente;//keep a reference from the rest of lista
