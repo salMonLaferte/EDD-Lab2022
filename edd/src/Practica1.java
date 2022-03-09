@@ -3,15 +3,71 @@ public class Practica1 {
     
 
 
-    // Aqui va tu comentario
+    /**
+     * 
+     */
     public static Lista<Integer> AgregaOrdenado(Lista<Integer> lista, int nuevo) {
         //Tu codigo aqui
+        if( lista.size() == 0)//if lista is empty, add nuevo
+            lista.add(nuevo);
+        IteradorLista it = lista.iteradorLista();
+        it.start();
+        int previous = (int)it.next();//set previous to the first element of the list
+        int count = 1;//set count to 1 to track the index of the iterator
+        if( nuevo <= previous ){// if nuevo is less than the first element add nuevo at the beginning
+            lista.agregaInicio(nuevo);
+            return lista;
+        }
+        while( it.hasNext() ){
+            //move to the next element in the list
+            int current = (int)it.next();
+            count++;
+            if( previous <= nuevo && nuevo <= current){
+                //add nuevo before the position that iterator is pointing to
+                lista.insert(count-1, nuevo);
+                return lista;
+            }
+            previous = current;
+        }
         return null;
     }
 
-    // Aqui va tu comentario
+    /**
+     * Performs union operation, lista1 is modified so it contains all the elements 
+     * from lista1 and lista2 without repeated elements. 
+     * 
+     * lista2 is not modified.
+     * 
+     * if lista1 contains repeated elements those elements will stay untouched, so in this case
+     * the result will contain the repeated elements from lista1.
+     * 
+     * Respuesta a la pregunta de la práctica.
+     * 
+     * Podemos mejorar el tiempo de ejecución para que sea O( n + m )
+     * Para ello podemos hacer uso de un set "s". Podemos recorrer las dos listas
+     * y añadir los elementos de cada una a s, lo cual se puede hacer en tiempo O(n + m) ya que añadir un elemento 
+     * a un set es O(1). Como s es un set no tendremos elementos repetidos, luego
+     * solo tenemos que construir una lista añadiendo cada elemento de s, lo cuál tambien se hace en O(n+m).
+     */
     public static void Union(Lista<Integer> lista1,Lista<Integer> lista2) {
-         return ;
+        IteradorLista it2 = lista2.iteradorLista();
+        IteradorLista it1 = lista1.iteradorLista();
+        it2.start();
+        while(it2.hasNext()){//for every element on lista2
+            int current = (int)it2.next();
+            it1.start();
+            boolean repeatedElement = false;
+            while(it1.hasNext()){//look if current element of lista2 is already in lista1
+                if( current == (int)it1.next() ){
+                    repeatedElement = true;
+                    break;
+                }
+            }
+            if(!repeatedElement){//if current element is not in lista 1, add it
+                lista1.add(current);
+            }
+        }
+        return ;
     }
 
     // Aqui va tu comentario
