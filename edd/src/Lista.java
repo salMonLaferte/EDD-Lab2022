@@ -423,17 +423,31 @@ public class Lista<T> implements Collection<T> {
     }
 
     // Tu comentario
+    /**
+     * Inserts all the elements of lista alternating between elements of this list and elements 
+     * of lista until is possible. 
+     * If lista size is bigger, just the first longi elements are alternated and the rest of the elements in lista
+     * are appended to this list.
+     * If lista size is shorter, just the first lista.longi are alternated and the rest of the elements stay in the same
+     * order.
+     * @param lista
+     */
     public void mezclaAlternada(Lista<T> lista){
+        if(lista== null)
+            return;
         Nodo current = cabeza;
-        while(lista.cabeza != null){
-            Nodo remainingRefA = current.siguiente;
-            current.siguiente = lista.cabeza;
-            Nodo remainingRefB = lista.cabeza.siguiente;
-            lista.cabeza.siguiente = remainingRefA;
-            lista.cabeza = remainingRefB;
-            lista.longi--;
-            current = remainingRefA;
+        while(lista.cabeza != null || current == null){//if lista cabeza is null we got out of nodes to add
+            Nodo remainingRefA = current.siguiente;//keep a reference from the rest of THIS list
+            current.siguiente = lista.cabeza;//point current element of THIS list to the cabeza element of lista
+            Nodo remainingRefB = lista.cabeza.siguiente;//keep a reference from the rest of lista
+            lista.cabeza.siguiente = remainingRefA;//point lista.cabeza to the rest of THIS list
+            if(remainingRefA == null)
+                ultimo = current;
+            lista.cabeza = remainingRefB;//update cabeza to the next element
+            lista.longi--;//update size of lista
+            current = remainingRefA;//update current to the next element of THIS lista
         }
+        append(lista);
         return;
     }
 
