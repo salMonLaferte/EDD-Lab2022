@@ -1,7 +1,8 @@
 Nombres ->
         ->
 
-compilar -> javac -d . src/*.java
+compilar -> javac -d . src/*.java  
+
 Ejecutar -> java Clases.Practica1
 
 

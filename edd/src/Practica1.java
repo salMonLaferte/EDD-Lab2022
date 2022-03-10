@@ -19,24 +19,67 @@ public class Practica1 {
 
     // Aqui va tu comentario
     public static void Interseccion(Lista<Integer> lista,Lista<Integer> lista2) {
-        
-        return ;
+ 
     }
 
 
 
     public static void main(String[] args) {
+
+        
         Lista<Integer> primera = new Lista<Integer>();
         Lista<Integer> segunda = new Lista<Integer>();
         Lista<Integer> tercera = new Lista<Integer>();
+        
+        //iter \0/
+        /*
+        primera.add(1);
+        primera.add(2);
+        primera.add(3);
+        primera.add(3);
+        IteradorLista<Integer> iter = primera.iteradorLista();
+        
+        
+        while (iter.hasNext()) {
+            Integer actual = iter.next();
+            System.out.println(actual);
+        }
+        */
+
+        
+        /*
+        if (iter.hasNext()) {
+            Integer actual = iter.next();
+            System.out.println(actual);    
+        }
+        else{
+            System.out.println("Termine la lista");
+        }
+        */
+
+        /*
+
+        System.out.println(iter.next());
+        System.out.println(iter.previous());
+        System.out.println(iter.previous());
+        System.out.println(iter.next());
+        System.out.println(iter.next());
+        System.out.println(iter.next());
+        iter.start();
+        System.out.println(iter.next());
+        */
+
+        
+
         
         
         // Tests toString
         for (int i = 0; i <= 5; i++) {
             primera.add(i);
         }
+
         
-        String test = "1 -> 2 -> 3 -> 4 -> 5";
+        String test = "0 -> 1 -> 2 -> 3 -> 4 -> 5";
         if (!primera.toString().equals(test)) {
             System.out.println("1 El toString no funciona!");
         }
@@ -156,7 +199,7 @@ public class Practica1 {
         segunda.add(10);
         
         
-        tercera = AgregaOrdenado(primera,9);
+        //tercera = AgregaOrdenado(primera,9);
         if (!tercera.toString().equals(segunda.toString())) {
             System.out.println("1 el agregaOrdenado no funciona!");
         }
