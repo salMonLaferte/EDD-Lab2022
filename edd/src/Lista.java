@@ -276,33 +276,27 @@ public class Lista<T> implements Collection<T> {
 
     
     /**
-     * Metodo que invierte el orden de la lista .
-     * 
+     * Revert list order.
+     * Time complexity: O(n) because the list is traversed once and changing node.siguiente
+     * reference takes O(1)
+     * Complejidad en espacio: O(1) because list is modified in-place and no new nodes are
+     * created.
      */
     public void reverse() {
-        // Tu codigo aqui
-        if( cabeza == null)
+        if( longi== 0 )
             return;
-        //Put the list elements on a stack so the first element is at the bottom and the last element is at the top
-        Stack<Nodo> stack = new Stack<>();
-        Nodo current = cabeza;
-        while(current !=null){
-            stack.push(current);
-            current = current.siguiente;
+        ultimo = cabeza;
+        Nodo previous = cabeza;
+        Nodo current = cabeza.siguiente;
+        cabeza.siguiente = null;
+        while(current != null ){
+            Nodo next = current.siguiente;
+            current.siguiente = previous;
+            previous = current;
+            if(next == null)
+                cabeza = current;
+            current = next;
         }
-        //Pop up the top element of the stack, which now is the head of the list
-        cabeza = stack.peek();
-        current = cabeza;
-        stack.pop();
-        while( !stack.empty() ){
-            //pop up the top element of the stack and set siguiente reference to the element at the top of the remaining stack 
-            current.siguiente = stack.peek();
-            current = current.siguiente;
-            stack.pop();
-        }
-        //set last element in the list to null, and ultimo to the last element of the list
-        current.siguiente = null;
-        ultimo = current;
     }
 
     /**
