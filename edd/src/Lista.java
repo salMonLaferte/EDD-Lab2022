@@ -1,4 +1,3 @@
-import java.util.Currency;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 // iterador
@@ -333,9 +332,12 @@ public class Lista<T> implements Collection<T> {
      */
     public void append(Lista<T> lista) {
         // Tu codigo aqui
-        if(lista == null || lista.longi == 0)//if list is null or empty don't do anything
+        if(lista == null || lista.longi == 0)//if lista is null or empty don't do anything
             return; 
-        ultimo.siguiente = lista.cabeza;
+        if(longi == 0)//if this list is empty point cabeza to lista.cabeza else just append the list at the end of this list
+            cabeza = lista.cabeza;
+        else
+            ultimo.siguiente = lista.cabeza;
         ultimo = lista.ultimo;
         longi += lista.longi;
         return ;
@@ -422,14 +424,23 @@ public class Lista<T> implements Collection<T> {
         return ;
     }
 
-    // Tu comentario
+   
     /**
      * Inserts all the elements of lista alternating between elements of this list and elements 
      * of lista until is possible. 
-     * If lista size is bigger, just the first longi elements are alternated and the rest of the elements in lista
+     * If lista size is bigger, just the first THIS.size elements are alternated and the rest of the elements in lista
      * are appended to this list.
-     * If lista size is shorter, just the first lista.longi are alternated and the rest of the elements stay in the same
+     * If lista size is shorter, just the first lista.size are alternated and the rest of the elements of this list stay in the same
      * order.
+     * Calling this method will modify lista. 
+     * If lista size is shorter  or equal than THIS list calling this method will left lista empty.
+     * If lista size is bigger than THIS list calling this method will delete the first (lista.size - THIS.size) elements
+     * from lista.
+     * 
+     * Time complexity: O(m) with m being the size of lista. Since method traverse lista at the same time that 
+     * traverse THIS list, the element insertion  between elements of this THIS list takes O(1) time and this is done
+     * m times, therefore complexity is O(m). The append of the rest of the elements takes O(1), so in total we have O(m).
+     * Space complexity: O(1) since THIS list and lista are modified in-place and just some extra nodes are created to maintain references
      * @param lista
      */
     public void mezclaAlternada(Lista<T> lista){

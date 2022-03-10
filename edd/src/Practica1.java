@@ -10,10 +10,9 @@ public class Practica1 {
      * If nuevo is less than or equal to the first element it will be added at the beginning. 
      * If nuevo is greater than or equal to every other element of the list it will be added at the end.
      * if lista is ordered it will stay ordered after adding the new element.
-     * 
      * Time complexity: Worst case is O(n) in which nuevo is inserted at the end of the list and is compared to
      * every other element on the list.
-     * Space complexity is O(1) because lista is modified in-place and just an extra element for the lis is created.
+     * Space complexity is O(1) because lista is modified in-place and just an extra element for the list is created.
      */
     public static Lista<Integer> AgregaOrdenado(Lista<Integer> lista, int nuevo) {
         if( lista.size() == 0)//if lista is empty, add nuevo
@@ -45,9 +44,12 @@ public class Practica1 {
      * from lista1 and lista2 without repeated elements. 
      * if lista1 contains repeated elements those elements will stay untouched, so in this case
      * the result will contain the repeated elements from lista1.
-     * 
      * lista2 is not modified.
-     * 
+     * Time complexity: O(n*m) where n and m are the sizes of lista1 and lista2 respectively. This is
+     * because for every element x in lista2, x is searched in lista1 to add it if is not there,
+     * this can be done in O(m) time, since we do this for every element in lista2, then
+     * time execution is O(n*m).
+     * Space complexity: O(n+m) since the resulting list has at most n+m elements.
      * Respuesta a la pregunta de la práctica.
      * 
      * Podemos mejorar el tiempo de ejecución para que sea O( n + m )
@@ -77,23 +79,58 @@ public class Practica1 {
         return ;
     }
 
-    // Aqui va tu comentario
+    /**
+     * Performs intersection operation and lista is modified so it contains the result.
+     * Calling this method will modify lista so it contains all the elements in both
+     * lista and lista2 without repeated elements.
+     * lista2 is not modified.
+     * 
+     * Time complexity: O(n+m) where n is the size of the smallest list and m is the size of the biggest list. This
+     * is because the method traverse the smallest list just once to create a set with its elements, since
+     * adding elements to a set is O(1), creating the set is O(n). Then every element in the biggest list is 
+     * searched in the set in O(1) and if is in the set it is added to the resulting list in O(1),
+     * so this takes O(m). Therefore time complexity is O(n+m).
+     * Space complexity: O(n) where n is the size of the smallest list. This is because a set with the elements
+     * of the smallest list is created to get rid of repeated elements.The resulting list has at most
+     * the size of the smallest of both lists.
+     * 
+     * 
+     * Pregunta a la respuesta de la practica:
+     * No sé como se podría mejorar el algoritmo, la practica pide un tiempo O(n*m) el algoritmo que implementé
+     * es O(n+m) que es mejor, el algoritmo O(n*m) no se me ocurrió.
+     * @param lista
+     * @param lista2
+     */
     private static void Interseccion(Lista<Integer> lista, Lista<Integer> lista2){
         Set<Integer> s = new HashSet<>();
-        IteradorLista<Integer> it = lista.iteradorLista();
-        it.start();
-        while(it.hasNext()){
-            s.add((int)it.next());
+        IteradorLista<Integer> itBigger;
+        IteradorLista<Integer> itSmaller;
+        //set the iterators of the smallest and biggest list
+        if(lista.size() <= lista2.size()){
+            itBigger = lista2.iteradorLista();
+            itSmaller = lista.iteradorLista();
         }
-        it = lista2.iteradorLista();
-        it.start();
-        lista.empty();
-        while(it.hasNext()){
-            int current = (int)it.next();
+        else{
+            itBigger = lista.iteradorLista();
+            itSmaller = lista2.iteradorLista();
+        }
+        //create a set with the elements of the smallest list
+        itSmaller.start();
+        while(itSmaller.hasNext()){
+            s.add((int)itSmaller.next());
+        }
+        //look which elements of the biggest list are in the smallest list
+        itBigger.start();
+        Lista<Integer> result = new Lista<Integer>();
+        while(itBigger.hasNext()){
+            int current = (int)itBigger.next();
             if(s.contains(current)){
-                lista.add(current);
+                result.add(current);//add the common elements to the resulting list
             }
         }
+        //save resulting list in lista
+        lista.empty();
+        lista.append(result);
         return;
     }
 
