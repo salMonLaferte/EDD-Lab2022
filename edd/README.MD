@@ -1,5 +1,4 @@
-Nombres ->
-        ->
+Nombre -> José David García Díaz. (Trabajo individual)
 
 compilar -> javac -d . src/*.java
 Ejecutar -> java Clases.Practica1
