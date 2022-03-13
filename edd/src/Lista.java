@@ -2,7 +2,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 // iterador
 //next
-import java.util.Stack;
+
 
 public class Lista<T> implements Collection<T> {
 
@@ -279,7 +279,7 @@ public class Lista<T> implements Collection<T> {
      * Revert list order.
      * Time complexity: O(n) because the list is traversed once and changing node.siguiente
      * reference takes O(1)
-     * Complejidad en espacio: O(1) because list is modified in-place and no new nodes are
+     * Space complexity: O(1) because list is modified in-place and no new nodes are
      * created.
      */
     public void reverse() {
@@ -304,6 +304,8 @@ public class Lista<T> implements Collection<T> {
      * 
      * @return una representación en cadena de la coleccion.
      * a -> b -> c -> d
+     * Time complexity: O(n) since list is traversed once as resulting string is created.
+     * Space complexity: O(n) since resulting string size depends of the number of elements in the list.
      */
     public String toString(){
         // Tu codigo aqui
@@ -322,7 +324,8 @@ public class Lista<T> implements Collection<T> {
 
     /**
      * Junta dos listas siempre y cuando sean del mismo tipo.
-     * 
+     * Time complexity: O(1)
+     * Space complexity: O(1) since no new nodes or lists are created.
      */
     public void append(Lista<T> lista) {
         // Tu codigo aqui
@@ -341,7 +344,8 @@ public class Lista<T> implements Collection<T> {
      * Regresa un entero con la posicion del elemento.
      * Solo nos importara la primera aparición del elemento
      * Empieza a contar desde 0.
-     * 
+     * Time complexity: O(n) since list is traversed once to find the element.
+     * Space complexity: O(1) since no new nodes or lists are created.
      * @param elemento elemento del cual queremos conocer la posición.
      * @return entero con la posicion del elemento
      * @throws IllegalArgumentException si <code>elemento</code> es
@@ -369,12 +373,14 @@ public class Lista<T> implements Collection<T> {
     
     /**
      * Inserta un elemento en un índice explícito.
-     *
+     * Time complexity: O(n) since list is traversed up to the index of insertion which is n in worst case.
+     * Space complexity: O(1) since just a new node is created to insert it in the list.
      * Si el índice es menor que cero, el elemento se agrega al inicio de la
      * lista. Si el índice es mayor o igual que el número de elementos en la
      * lista, el elemento se agrega al fina de la misma. En otro caso, después
      * de mandar llamar el método, el elemento tendrá el índice que se
      * especifica en la lista.
+     * 
      * 
      * @param i        el índice dónde insertar el elemento. Si es menor que 0 el
      *                 elemento se agrega al inicio, y si es mayor o igual que el
