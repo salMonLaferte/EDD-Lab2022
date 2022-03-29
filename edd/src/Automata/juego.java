@@ -24,9 +24,9 @@ public class juego extends AC{
     		MauxCopia[i][j]=2;
     		}
     	}
- 		   	//Maux2[2][1]=1;  Elementos que use como prueba del automata
- 		   	//Maux2[2][2]=1;   Trazando una linea vertical en la matriz
- 		   	//Maux2[2][3]=1;     para crear un Parpadeador o ´blinker´.
+ 		   	//Maux2[2][1]=1;  
+ 		   	//Maux2[2][2]=1;   
+ 		   	//Maux2[2][3]=5;    .
 		
 
 		//Modifico cada valor de la matriz Maux de forma aleatoria.

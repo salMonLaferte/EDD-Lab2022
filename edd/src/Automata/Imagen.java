@@ -66,6 +66,8 @@ public class Imagen extends JPanel {
             for (int j=1;j<matriz.length+1;j++) {
                 int aux1i = (sizeCell*(i-1)+i);
                 int aux1j = (sizeCell*(j-1)+j);
+                Color colorcitoBonito = new Color(255,255,255);
+               
                switch (matriz [i-1][j-1]) {
                     case 0:
                         gc.setColor(Color.YELLOW); break;
@@ -79,6 +81,7 @@ public class Imagen extends JPanel {
                         gc.setColor(Color.RED); break;
                     case 5: 
                         gc.setColor(Color.GREEN); break;
+                    
                     
                 }
                 gc.fillRect(aux1i,aux1j,sizeCell,sizeCell);
