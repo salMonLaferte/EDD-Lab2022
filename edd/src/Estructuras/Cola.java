@@ -2,9 +2,6 @@ package edd.src.Estructuras;
 
 public class Cola<T> extends PushPop<T>{
     @Override
-    /**
-     * Agregar al final
-     */
     public void push(T elemento) {
         Nodo nuevoElemento = new Nodo(elemento);
         nuevoElemento.siguiente = null;
@@ -20,15 +17,21 @@ public class Cola<T> extends PushPop<T>{
     }
 
     @Override
-    public PushPop<T> clone() {
-        // TODO Auto-generated method stub
-        return null;
+    public Cola<T> clone() {
+        Cola<T> nueva = new Cola<T>();
+        Cola<T> aux = new Cola<T>();
+        if (this.isEmpty()) {
+            return nueva;
+        }
+        Nodo actual = this.cabeza;
+        while(actual != null){
+            aux.push(actual.elemento);
+            actual = actual.siguiente;
+        }
+        return nueva;  
     }
 
     @Override
-    /**
-     * Regresa una representación de la cola en cadena de caracteres.
-     */
     public String toString() {
         if(this.isEmpty()){
             return "";
