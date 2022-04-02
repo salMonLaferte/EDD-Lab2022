@@ -19,13 +19,12 @@ public class Cola<T> extends PushPop<T>{
     @Override
     public Cola<T> clone() {
         Cola<T> nueva = new Cola<T>();
-        Cola<T> aux = new Cola<T>();
         if (this.isEmpty()) {
             return nueva;
         }
         Nodo actual = this.cabeza;
         while(actual != null){
-            aux.push(actual.elemento);
+            nueva.push(actual.elemento);
             actual = actual.siguiente;
         }
         return nueva;  
@@ -40,7 +39,7 @@ public class Cola<T> extends PushPop<T>{
         Pila<String> pila = new Pila<String>();
         Nodo actual = cabeza;
         while(actual != null){
-            pila.push(actual.toString());
+            pila.push(actual.elemento.toString());
             actual = actual.siguiente;
         }
         //Va sacando los elementos en cadenas de caracteres para guardarlos en la cadena resultado con el orden inverso al de la lista.
