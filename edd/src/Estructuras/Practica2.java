@@ -9,7 +9,7 @@ public class Practica2 {
         for(int i=cantidadDiscos; i>= 1; i--){
             origen.push(i);
         }
-        imprimeEstadoHanoi(origen, auxiliar, destino);
+        imprimeEstadoHanoi(cantidadDiscos, origen, auxiliar, destino);
 
         int turno = 0;// variable para saber si en este turno se mueve el disco más pequeño o no
         int ciclo = 0;// variable para saber en que pila está el disco mas pequeño
@@ -46,7 +46,7 @@ public class Practica2 {
                 }
             }
             turno = (turno + 1) % 2;
-            imprimeEstadoHanoi(origen, auxiliar, destino);
+            imprimeEstadoHanoi(cantidadDiscos, origen, auxiliar, destino);
             count++;
         }
         System.out.println("Movimientos : " + count);
@@ -90,16 +90,44 @@ public class Practica2 {
      * @param auxiliar
      * @param destino
      */
-    public static void imprimeEstadoHanoi(Pila<Integer> origen, Pila<Integer> auxiliar, Pila<Integer> destino){
+    public static void imprimeEstadoHanoi(int numeroDeDiscos, Pila<Integer> origen, Pila<Integer> auxiliar, Pila<Integer> destino){
+        
+        //Crea una matriz de numeroDeDiscos * 3 para dibujar la grafica de las torres
+        String[][] grafica = new String[numeroDeDiscos][3];
+        for(int i=0; i<numeroDeDiscos; i++){
+            for(int j=0; j<3; j++){
+                grafica[i][j] = " | * | ";
+            }
+        }
+        //Obtiene la representacion en cadena de caracteres de cada string
         String[] pilares = new String[3];
         pilares[0] = origen.toString();
         pilares[1] = auxiliar.toString() ;
         pilares[2] = destino.toString();
+
+        //Construye la grafica
         for(int i=0; i<3; i++){
-            pilares[i] = pilares[i].replaceAll(", ", "-");
-            System.out.println("*" + pilares[i]);
+            //Obtiene los numeros de cada pila
+            pilares[i] = pilares[i].replaceAll(", ", "/");
+            String discos[] = pilares[i].split("/");
+            //Escribe los numeros de cada pila en su columna correspondiente
+            for(int j=numeroDeDiscos -1, k = discos.length - 1 ; k >= 0; j--,k-- ){
+                if(discos[k] == "")
+                    discos[k] = "*";
+                grafica[j][i] = " | " + discos[k] + " | ";
+            }
         }
-        System.out.println("----------------");
+        
+        //Genera el string con la grafica de caracteres e imprime
+        String resultado = "";
+        for(int i=0; i<numeroDeDiscos; i++){
+            for(int j=0; j<3; j++){
+                resultado += grafica[i][j];
+            }
+            resultado += "\n";
+        }
+        System.out.println(resultado);
+        System.out.println("-------------------------");
     }
 
     /**
@@ -154,9 +182,8 @@ public class Practica2 {
         Pila<Integer> origen = new Pila<Integer>();
         Pila<Integer> auxiliar = new Pila<Integer>();
         Pila<Integer> destino = new Pila<Integer>();
-        torresHanoi(5, origen, auxiliar, destino);
+        torresHanoi(n, origen, auxiliar, destino);
         scanner.close();
-
     }
 
 }
