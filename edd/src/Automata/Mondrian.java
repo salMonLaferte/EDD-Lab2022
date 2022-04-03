@@ -65,7 +65,6 @@ public class Mondrian extends AC {
         Pila<Integer> pila = new Pila<Integer>();
         Pila<Integer> cola = new Pila<Integer>();
         
-        pila.push(2);
 
         //La matriz Maux2 Contiene el estado actual de la matriz.
         //La matriz CopiaM es una matriz copia de Maux2 donde debes poner los nuevos valores
@@ -87,26 +86,34 @@ public class Mondrian extends AC {
 
 
                 int maxIndex=0;
-                int maxValue= freq[0];
-                for(int k=1; k<6; k++){
-                    if(freq[k] > maxValue ){
-                        maxValue = freq[k];
+                int minIndex= 0;
+                for(int k=1; k<5; k++){
+                    if(freq[k] > freq[maxIndex] ){
                         maxIndex = k;
                     }
-                    else if(freq[k] ==  maxValue){
+                    else if(freq[k] ==  freq[maxIndex]){
                         if( Math.random() > .5f )
                             maxIndex = k;
                     }
+                    if(freq[k] < freq[minIndex]){
+                        minIndex = k;
+                    }
+                    else if(freq[k] == freq[minIndex]){
+                        if( Math.random() > .5f )
+                            minIndex = k;
+                    }
                 }
 
-                if(maxValue > 2 && maxValue < 4){
-                    CopiaM[i][j] = maxIndex;
-                    pila.push(Maux2[i][j]);
-                }
-                if( maxValue >= 4){
-                    if(!pila.isEmpty()){
-                        CopiaM[i][j] = pila.peek();
-                        pila.pop();
+                if(freq[maxIndex] >= 4){
+                    if( freq[Maux2[i][j]] >= 3 ){
+                        if(!pila.isEmpty()){
+                            CopiaM[i][j] = pila.peek();
+                            pila.pop();
+                        }else
+                            CopiaM[i][j] = minIndex;
+                    }
+                    else{
+                        CopiaM[i][j] = maxIndex;
                         pila.push(Maux2[i][j]);
                     }
                 }
@@ -117,9 +124,6 @@ public class Mondrian extends AC {
             }
         }
         
-
-
-
         for (int i = 0; i < Maux2.length; i++) { // Fors que arreglan la matriz a regresar en la copia.
             for (int j = 0; j < Maux2.length; j++) {
                 Maux2[i][j] = CopiaM[i][j];
