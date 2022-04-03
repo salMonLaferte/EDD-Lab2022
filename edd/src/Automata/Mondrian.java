@@ -104,17 +104,17 @@ public class Mondrian extends AC {
                     }
                 }
 
-                if(freq[maxIndex] >= 4){
-                    if( freq[Maux2[i][j]] >= 3 ){
-                        if(!pila.isEmpty()){
-                            CopiaM[i][j] = pila.peek();
-                            pila.pop();
+                if(freq[maxIndex] >= 4 ){
+                    if( Maux2[i][j] == maxIndex ){
+                        if(!cola.isEmpty()){
+                            CopiaM[i][j] = cola.peek();
+                            cola.pop();
                         }else
                             CopiaM[i][j] = minIndex;
                     }
                     else{
                         CopiaM[i][j] = maxIndex;
-                        pila.push(Maux2[i][j]);
+                        cola.push(Maux2[i][j]);
                     }
                 }
                 else{
