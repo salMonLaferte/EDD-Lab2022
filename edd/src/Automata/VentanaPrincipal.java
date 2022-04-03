@@ -58,8 +58,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
          * AutomataCelular a = new juego();
          */
        //AutomataCelular a = new JuegoVida();
-       //AutomataCelular a = new Mondrian();
-       AutomataCelular a = new Mondrian2();
+       AutomataCelular a = new Mondrian();
+       //AutomataCelular a = new Mondrian2();
        //AutomataCelular a=new juego();
        vp = new VentanaPrincipal(a);
     }
@@ -170,7 +170,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 labelEvolucion.setText("Evolucionando: "+automata.getEvolucion());
                 imagen.pinta(automata.getAutomata2(),automata.getColores());
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(100);
                 } catch (InterruptedException ex) {}
             }
         }

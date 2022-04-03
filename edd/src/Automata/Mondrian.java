@@ -65,10 +65,57 @@ public class Mondrian extends AC {
         Pila<Integer> pila = new Pila<Integer>();
         Pila<Integer> cola = new Pila<Integer>();
         
+        pila.push(2);
+
         //La matriz Maux2 Contiene el estado actual de la matriz.
         //La matriz CopiaM es una matriz copia de Maux2 donde debes poner los nuevos valores
-        
         // Aqui va tu codigo  
+
+        int[][] indexes = {{-1,-1},{-1,0},{-1,1},{0,-1},{0,1},{1,-1},{1,0},{1,1}};//para iterar en la vecindad de Moore
+        
+        for(int i=0; i<Imagen.numCells; i++){
+            for(int j=0; j< Imagen.numCells; j++){
+                // Cuenta la frecuencia de colores en la vecindad de MOOre
+                int[] freq = {0,0,0,0,0,0};
+                for(int k=0; k<8; k++){
+                    int x = i + indexes[k][0];
+                    int y = j + indexes[k][1];
+                    if( x >= 0 && x < Imagen.numCells && y >=0 && y < Imagen.numCells){
+                        freq[Maux2[x][y]]++;
+                    }
+                }
+
+
+                int maxIndex=0;
+                int maxValue= freq[0];
+                for(int k=1; k<6; k++){
+                    if(freq[k] > maxValue ){
+                        maxValue = freq[k];
+                        maxIndex = k;
+                    }
+                    else if(freq[k] ==  maxValue){
+                        if( Math.random() > .5f )
+                            maxIndex = k;
+                    }
+                }
+
+                if(maxValue > 2 && maxValue < 4){
+                    CopiaM[i][j] = maxIndex;
+                    pila.push(Maux2[i][j]);
+                }
+                if( maxValue >= 4){
+                    if(!pila.isEmpty()){
+                        CopiaM[i][j] = pila.peek();
+                        pila.pop();
+                        pila.push(Maux2[i][j]);
+                    }
+                }
+                else{
+                    CopiaM[i][j] = Maux2[i][j];
+                }
+
+            }
+        }
         
 
 
