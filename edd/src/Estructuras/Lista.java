@@ -2,8 +2,8 @@ package edd.src.Estructuras;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-// iterador
-//next
+import java.util.Comparator;
+
 
 public class Lista<T> implements Collection<T> {
 
@@ -312,8 +312,19 @@ public class Lista<T> implements Collection<T> {
      * a -> b -> c -> d
      */
     public String toString(){
-        // Tu codigo aqui
-        return "";
+        if (isEmpty())
+            return "[]";
+        if (cabeza == ultimo) {
+            return "[" + cabeza.elemento + "]";
+        }
+        String a = "[";
+        Nodo n = cabeza;
+        for (int i = 0; i < longi - 1; i++) {
+            a = a + n.elemento + ", ";
+            n = n.siguiente;
+        }
+        a = a + ultimo.elemento + "]";
+        return a;
     }
 
     /**
@@ -367,6 +378,79 @@ public class Lista<T> implements Collection<T> {
     public void mezclaAlternada(Lista<T> lista){
         return;
     }
+
+
+
+    // miLista.mergeSort();
+    // Merge Sort
+    public Lista<T> mergeSort(Comparator<T> comparador){
+        if(longi == 1 || longi == 0){
+            return clone();
+        }
+        Lista<T> izq = new Lista<T>();
+        Lista<T> der = new Lista<T>();
+
+        int mitad = longi/2;
+        Nodo aux = cabeza;
+        while(aux != null && mitad --!= 0 ){ 
+            izq.add(aux.elemento);
+            aux = aux.siguiente;
+        }
+        while(aux != null){
+            der.add(aux.elemento);
+            aux = aux.siguiente;
+        }
+        System.out.println("izq: " + izq.toString());
+        System.out.println("der: " + der.toString());
+        izq = izq.mergeSort(comparador);
+        der = der.mergeSort(comparador);
+        return merge(izq, der, comparador);
+    }
+
+    public Lista<T> merge(Lista<T> izq, Lista<T> der, Comparator<T> comparador){
+        Lista<T> resultado = new Lista<T>();
+        Nodo auxIzq = izq.cabeza;
+        Nodo auxDer = der.cabeza;
+        while (auxIzq != null && auxDer != null ) {
+            if(comparador.compare(auxIzq.elemento, auxDer.elemento) < 0){
+                resultado.add(auxIzq.elemento);
+                auxIzq = auxIzq.siguiente;
+            }
+            else{
+                resultado.add(auxDer.elemento);
+                auxDer = auxDer.siguiente;
+            }
+        }
+        if (auxIzq == null) {
+            while (auxDer != null) {
+                resultado.add(auxDer.elemento);
+                auxDer = auxDer.siguiente;
+            }
+        }else{
+            while (auxIzq != null) {
+                resultado.add(auxIzq.elemento);
+                auxIzq = auxIzq.siguiente;
+            }
+        }
+       return resultado;
+    } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Regresa un iterador para recorrer la lista en una dirección.

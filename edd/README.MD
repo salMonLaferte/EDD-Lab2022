@@ -3,7 +3,7 @@
 
 compilar -> javac -d . src/Estructuras/*.java
 
-Ejecutar -> java edd.src.Estructuras.Practica2
+Ejecutar -> java edd.src.Estructuras.pruebaMerge
 
 
 
