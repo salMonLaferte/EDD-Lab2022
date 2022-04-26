@@ -1,3 +1,5 @@
+package Clases;
+
 //import java.util.Comparator;
 
 public interface Collection<T> {

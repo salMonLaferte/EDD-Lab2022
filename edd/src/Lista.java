@@ -1,3 +1,5 @@
+package Clases;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 // iterador
@@ -309,6 +311,7 @@ public class Lista<T> implements Collection<T> {
      */
     public String toString(){
         // Tu codigo aqui
+
         String s = "";
         if(cabeza == null)//if list is empty print an empty string
             return s;
@@ -320,6 +323,8 @@ public class Lista<T> implements Collection<T> {
         }
         s+= current.elemento.toString(); //last element is added to s without an arrow
         return s;
+
+   
     }
 
     /**

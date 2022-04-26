@@ -1,5 +1,9 @@
-import java.util.Set;
-import java.util.HashSet;
+
+package Clases;
+
+import java.util.Iterator;
+
+
 public class Practica1 {
     
 
