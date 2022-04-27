@@ -137,6 +137,18 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
         return new Iterador();
     }
 
+    @Override
+    public boolean delete(T elemento) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public T pop() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 
 
 }

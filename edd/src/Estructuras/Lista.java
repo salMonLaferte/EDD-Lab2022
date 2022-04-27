@@ -130,7 +130,8 @@ public class Lista<T> implements Collection<T> {
         }
         Nodo nuevo = new Nodo(elemento);
         if(cabeza == null){
-            this.cabeza = this.ultimo = nuevo;
+            this.cabeza = nuevo; 
+            this.ultimo = nuevo;
         }
         else{
             this.ultimo.siguiente = nuevo;
@@ -196,7 +197,10 @@ public class Lista<T> implements Collection<T> {
     public T pop(){
         T valor = ultimo.elemento;
         ultimo = ultimo.anterior;
-        ultimo.siguiente = null;
+        if(ultimo != null)
+            ultimo.siguiente = null;
+        else 
+            cabeza = null;
         longi --;
         return valor;
     }
@@ -543,21 +547,6 @@ public class Lista<T> implements Collection<T> {
         }
        return resultado;
     } 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

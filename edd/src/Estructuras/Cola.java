@@ -38,4 +38,10 @@ public class Cola<T> extends PushPop<T> {
         ultimo.siguiente = nuevo;
         ultimo = nuevo;
     }
+
+    @Override
+    public PushPop<T> clone() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

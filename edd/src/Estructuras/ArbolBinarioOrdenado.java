@@ -29,7 +29,12 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>> extends ArbolBinario<
                 }
             }
 
-            return v.elemento
+            return v.elemento;
+        }
+        @Override
+        public boolean hasNext() {
+            // TODO Auto-generated method stub
+            return false;
         }
 
 
@@ -45,6 +50,12 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>> extends ArbolBinario<
 
     }
 
+    private void buildUnsorted() {
+    }
+
+    private void buildSorted() {
+    }
+
     /**
      * Regresa un iterador para iterar el árbol. El árbol se itera en orden.
      * 
@@ -53,6 +64,24 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>> extends ArbolBinario<
     @Override
     public Iterator<T> iterator() {
         return new Iterador();
+    }
+
+    @Override
+    public void add(T elemento) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public boolean delete(T elemento) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public T pop() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
