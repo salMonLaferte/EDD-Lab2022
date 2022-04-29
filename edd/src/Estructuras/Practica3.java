@@ -1,9 +1,50 @@
 package edd.src.Estructuras;
+
+import java.util.Comparator;
+
 public class Practica3 {
     
+    /**
+     * Imprime la pareja de numeros en la lista tal que su suma es la mas cercana a N
+     * @param lista
+     * @param N
+     */
     public static void sumaCercana(Lista<Integer> lista, int N){
+        //Ordenamos la lista en O(n log n)
+        Lista<Integer> sorted = lista.mergeSort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }  
+        });
 
+        //Inicializamos un puntero al inicio y otro al final de la lista
+        IteradorLista<Integer> leftIt = sorted.iteradorLista();
+        IteradorLista<Integer> rightIt = sorted.iteradorLista();
+        rightIt.end();
+        int r = rightIt.previous();
+        int l = leftIt.next();
+        int goodL = l;
+        int goodR = r;
+        int lowestDifference = Math.abs(N-(r+l));
+        while(r+l != N){
+            if( r + l < N){//Si la suma de los punteros es menor movemos el puntero izquierdo a la derecha
+                l = leftIt.next();
+            }
+            else{// Si la suma de los punteros es mayor movemos el puntero derecho a la izquierda
+                r = rightIt.previous();
+            }
+            if( r == l)//Si ambos apuntadores apuntan al mismo valor terminamos
+                break;
+            if( lowestDifference > Math.abs(N-(r+l))){//Si la nueva diferencia es menor la guardanos, asi como los numeros que la consiguen
+                goodL = l;
+                goodR = r;
+                lowestDifference =Math.abs(N-(r+l));
+            }
+        }
+        System.out.print(goodL + ", " + goodR + "\n");
     }
+
 
     /**Imprime las permutaciones de una cadena de caracteres
      * 
@@ -131,7 +172,7 @@ public class Practica3 {
 
     /**
      * Función recursiva que imprime las soluciones del problema de las n reinas usando backtracking
-     * @param solucion
+     * @param solucion Solucion parcial, en el que el i esimo elemento de la lista representa la posiciob de la reina en la i-esima columna 
      * @param N
      */
     public static void reinasBackTrack(Lista<Integer> solucion, int N){
@@ -168,6 +209,10 @@ public class Practica3 {
         return true;
     }
 
+    /**
+     * Imprime una soluciòn al problema de las n reinas en forma de tablero
+     * @param solucion
+     */
     public static void imprimirSolucionReinas(Lista<Integer> solucion){
         IteradorLista<Integer> it = solucion.iteradorLista();
         String[] lines =  new String[solucion.size()];
@@ -191,13 +236,57 @@ public class Practica3 {
 
     }
 
+    /**
+     * Devuelve la raiz cuadrada de x con un error maximo de 1e-5
+     * @param x
+     * @return
+     */
+    public static double sqrtBusqBin(int x){
+        double l = 1;
+        double r = x;
+        double a = (l+r)/2;;
+        while( Math.abs(a*a - x) > 0.00001f){
+            a = (l+r)/2;
+            if( a*a > x){
+                r = a; 
+            }
+            else
+                l = a;
+        }
+        return a;
+    }
+
     public static void main(String[] args) {
         System.out.println("Permutaciones de: ABC");
         permutacionesCadena("ABC");
         System.out.println("Primos que suman P=2, S=23, N=3");
         primosQueSuman(23, 2, 3);
-        System.out.println("N reinas para  N=8");
-        N_Reinas(8);
+        System.out.println("N reinas para  N=4");
+        N_Reinas(4);
+        System.out.println("Suma cercana");
+        Lista<Integer> lista = new Lista<>();
+        lista.add(25);
+        lista.add(12);
+        lista.add(17);
+        lista.add(6);
+        lista.add(38);
+        lista.add(19);
+        lista.add(1);
+        System.out.println("La lista es: " + lista.toString());
+        System.out.println("Los numeros cuya suma mas cercana es 29 son : ");
+        sumaCercana(lista, 29);
+        System.out.println("Los numeros cuya suma mas cercana es 4 son : ");
+        sumaCercana(lista, 4);
+        System.out.println("Los numeros cuya suma mas cercana es 86 son : ");
+        sumaCercana(lista, 83);
+        System.out.println("Los numeros cuya suma mas cercana es 24 son : ");
+        sumaCercana(lista, 24);
+        System.out.println("La raiz cuadrada aproximada de 37 es: ");
+        System.out.println(sqrtBusqBin(37));
+        System.out.println("La raiz cuadrada aproximada de 263 es: ");
+        System.out.println(sqrtBusqBin(263));
+        System.out.println("La raiz cuadrada aproximada de 400 es: ");
+        System.out.println(sqrtBusqBin(400));
     }
 
 }
