@@ -1,7 +1,6 @@
 package edd.src.Estructuras;
 
 import java.util.NoSuchElementException;
-import java.util.Comparator;
 
 /**
  * <p>

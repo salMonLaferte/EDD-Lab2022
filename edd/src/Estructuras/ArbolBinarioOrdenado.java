@@ -31,6 +31,7 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>> extends ArbolBinario<
 
             return v.elemento;
         }
+
         @Override
         public boolean hasNext() {
             // TODO Auto-generated method stub
@@ -40,20 +41,79 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>> extends ArbolBinario<
 
 
     }
+
     public ArbolBinarioOrdenado(Lista<T> lista, boolean isSorted ){
+        raiz = new Vertice(null);
         if (isSorted) {
-            buildSorted();
+            buildSorted(lista);
         }
         else{
-            buildUnsorted();
+            buildUnsorted(lista);
         }
 
     }
 
-    private void buildUnsorted() {
+    private void buildUnsorted( Lista<T> lista) {
+        //buildPreOrder(0, 3 , raiz , lista.iteradorLista());
+        //buildEmptyTree(raiz, 2);
+        //fillPreOrder(raiz, lista.iteradorLista());
+        buildPreOrder(2, raiz, lista.iteradorLista());
     }
 
-    private void buildSorted() {
+    /*private void buildPreOrder(int depth, Vertice root, IteradorLista<T> it){
+        if(depth == 0)
+            return;
+        if(it.hasNext())
+            root.izquierdo = new Vertice(it.next());
+        buildEmptyTree(root.izquierdo, depth-1);
+        if(it.hasNext())
+            root.derecho = new Vertice(it.next());
+        buildEmptyTree(root.derecho, depth-1);  
+    }*/
+
+    private void buildPreOrder(int depth, Vertice raiz, IteradorLista<T> it){
+        //at max depth set value for this node
+        if(depth == 0){
+            if(it.hasNext())
+                raiz.elemento = it.next();
+            return;
+        }
+         //build left tree
+        Vertice iz = new Vertice(null);
+        raiz.izquierdo = iz;
+        buildPreOrder(depth-1, raiz.izquierdo, it);
+        if(it.hasNext()){
+            //set value for this node
+            raiz.elemento = it.next();
+            //build right tree
+            Vertice der = new Vertice(null);
+            raiz.derecho = der;
+            buildPreOrder(depth-1, raiz.derecho, it);
+        }
+    }
+
+
+    
+    private void buildEmptyTree(Vertice root, int depth){
+        if(depth == 0)
+            return;
+        root.izquierdo = new Vertice(null);
+        buildEmptyTree(root.izquierdo, depth-1);
+        root.derecho = new Vertice(null);
+        buildEmptyTree(root.derecho, depth-1);
+    }
+
+    private void fillPreOrder(Vertice root, IteradorLista<T> it){
+        if(root.hayIzquierdo())
+            fillPreOrder(root.izquierdo, it);
+        if(it.hasNext())
+            root.elemento = it.next();
+        if(root.hayDerecho())
+            fillPreOrder(root.derecho, it);
+    }
+
+    private void buildSorted( Lista<T> lista) {
+ 
     }
 
     /**
@@ -82,6 +142,22 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>> extends ArbolBinario<
     public T pop() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public String toString(){
+        return inOrderTraversal( raiz);
+    }
+    
+    private String inOrderTraversal( Vertice root){
+        if(root == null)
+            return "";
+        String res = "";
+        res += inOrderTraversal( root.izquierdo);
+        res += root.elemento + ", ";
+        res += inOrderTraversal( root.derecho);
+        
+        return res;
     }
 
 }

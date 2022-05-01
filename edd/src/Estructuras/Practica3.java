@@ -98,7 +98,7 @@ public class Practica3 {
     public static void primosQueSuman(int S, int P, int N){
         int[] primos = criba(P, S);
         Lista<Integer> solution = new Lista<Integer>();
-        primosBackTrack(primos, solution, 0, 0, S, N);
+        primosBackTrack(primos, solution, -1, 0, S, N);
     }
 
     /***
@@ -116,8 +116,8 @@ public class Practica3 {
             System.out.println(solucion);
         }else if( solucion.size() == N)
             return;
-        for(int i=peekIndex; i<primos.length; i++){
-            if(suma + primos[i] <= S && !solucion.contains(primos[i]) ){
+        for(int i=peekIndex+1; i<primos.length; i++){
+            if(suma + primos[i] <= S ){
                 solucion.add(primos[i]);
                 primosBackTrack(primos, solucion, i, suma + primos[i], S, N);
                 solucion.pop();
@@ -259,8 +259,8 @@ public class Practica3 {
     public static void main(String[] args) {
         System.out.println("Permutaciones de: ABC");
         permutacionesCadena("ABC");
-        System.out.println("Primos que suman P=2, S=23, N=3");
-        primosQueSuman(23, 2, 3);
+        System.out.println("Primos que suman P=7, S=100, N=4");
+        primosQueSuman(100, 7, 4);
         System.out.println("N reinas para  N=4");
         N_Reinas(4);
         System.out.println("Suma cercana");
@@ -287,6 +287,17 @@ public class Practica3 {
         System.out.println(sqrtBusqBin(263));
         System.out.println("La raiz cuadrada aproximada de 400 es: ");
         System.out.println(sqrtBusqBin(400));
+
+        lista.empty();
+        lista.add(1);
+        lista.add(2);
+        lista.add(3);
+        lista.add(4);
+        lista.add(5);
+        lista.add(6);
+
+        ArbolBinarioOrdenado<Integer> arbol = new ArbolBinarioOrdenado<>(lista, false) ;
+        System.out.println(arbol);
     }
 
 }
