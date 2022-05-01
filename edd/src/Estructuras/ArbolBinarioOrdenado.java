@@ -74,55 +74,24 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>> extends ArbolBinario<
      * @param lista
      */
     private void buildSorted( Lista<T> lista) {
-         buildPreOrder(calculateDepth(lista.size()), raiz, lista.iteradorLista());
+        raiz = buildFromTo(0, lista.size()-1, lista.iteradorLista());
     }
 
     /**
-     * Calcula la profundidad que tendría el arbol balanceado para almacenar n elementos
-     * @param n
-     * @return
+     * Construye el arbol de manera in-order con los valores de la lista a la cual apunta it
      */
-    private int calculateDepth(int n){
-        int k = 1;
-        int count = 0;
-        while(k <= n){
-            k=k*2;
-            count++;
-        }
-        return count;
+    private Vertice buildFromTo(int start, int end, IteradorLista<T> it){
+        if(start > end)
+            return null;
+        int mid = (start+ end)/2;
+        Vertice izq = buildFromTo(start, mid-1, it);
+        Vertice v = new Vertice(it.next());
+        v.izquierdo = izq;
+        v.derecho = buildFromTo(mid+1, end, it);
+        return v;
     }
 
-    private void buildPreOrder(int depth, Vertice raiz, IteradorLista<T> it){
-        //en la profundidad maxima asigna el siguiente valor a este nodo
-        if(depth == 0){
-            if(it.hasNext())
-                raiz.elemento = it.next();
-            return;
-        }
-         //construye el arbol izquierdo
-        Vertice iz = new Vertice(null);
-        raiz.izquierdo = iz;
-        buildPreOrder(depth-1, raiz.izquierdo, it);
-        if(it.hasNext()){
-            //asigna el valor para este nodo
-            raiz.elemento = it.next();
-            //construye el arbol derecho.
-            if(it.hasNext()){
-                Vertice der = new Vertice(null);
-                raiz.derecho = der;
-                buildPreOrder(depth-1, raiz.derecho, it);
-            }
-        }
-        String thisNode = "";
-        if(raiz.izquierdo  != null)
-            thisNode += raiz.izquierdo.elemento;
-        thisNode+= " , " + raiz.elemento  + " , ";
-        if(raiz.derecho !=null)
-            thisNode += raiz.derecho.elemento;
-        System.out.println(thisNode);
-        
-    }
-
+    
     /**
      * Busca un elemento el el arbol
      * @param elemento
