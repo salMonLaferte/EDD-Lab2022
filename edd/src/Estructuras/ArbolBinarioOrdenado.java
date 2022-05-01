@@ -53,68 +53,94 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>> extends ArbolBinario<
 
     }
 
+    /**
+     * Construye el arbol a partir de una lista no ordenada en O(n logn)
+     * @param lista
+     */
     private void buildUnsorted( Lista<T> lista) {
-        //buildPreOrder(0, 3 , raiz , lista.iteradorLista());
-        //buildEmptyTree(raiz, 2);
-        //fillPreOrder(raiz, lista.iteradorLista());
-        buildPreOrder(2, raiz, lista.iteradorLista());
+        Comparator<T> comp = new Comparator<T>() {
+            @Override
+            public int compare(T o1, T o2) {
+                return o1.compareTo(o2);
+            }
+            
+        };
+        Lista<T> sorted = lista.mergeSort(comp);
+        buildSorted(sorted);
     }
 
-    /*private void buildPreOrder(int depth, Vertice root, IteradorLista<T> it){
-        if(depth == 0)
-            return;
-        if(it.hasNext())
-            root.izquierdo = new Vertice(it.next());
-        buildEmptyTree(root.izquierdo, depth-1);
-        if(it.hasNext())
-            root.derecho = new Vertice(it.next());
-        buildEmptyTree(root.derecho, depth-1);  
-    }*/
+    /**
+     * Construye el arbol a partir de una lista ordenada
+     * @param lista
+     */
+    private void buildSorted( Lista<T> lista) {
+         buildPreOrder(calculateDepth(lista.size()), raiz, lista.iteradorLista());
+    }
+
+    /**
+     * Calcula la profundidad que tendría el arbol balanceado para almacenar n elementos
+     * @param n
+     * @return
+     */
+    private int calculateDepth(int n){
+        int k = 1;
+        int count = 0;
+        while(k <= n){
+            k=k*2;
+            count++;
+        }
+        return count;
+    }
 
     private void buildPreOrder(int depth, Vertice raiz, IteradorLista<T> it){
-        //at max depth set value for this node
+        //en la profundidad maxima asigna el siguiente valor a este nodo
         if(depth == 0){
             if(it.hasNext())
                 raiz.elemento = it.next();
             return;
         }
-         //build left tree
+         //construye el arbol izquierdo
         Vertice iz = new Vertice(null);
         raiz.izquierdo = iz;
         buildPreOrder(depth-1, raiz.izquierdo, it);
         if(it.hasNext()){
-            //set value for this node
+            //asigna el valor para este nodo
             raiz.elemento = it.next();
-            //build right tree
-            Vertice der = new Vertice(null);
-            raiz.derecho = der;
-            buildPreOrder(depth-1, raiz.derecho, it);
+            //construye el arbol derecho.
+            if(it.hasNext()){
+                Vertice der = new Vertice(null);
+                raiz.derecho = der;
+                buildPreOrder(depth-1, raiz.derecho, it);
+            }
         }
+        String thisNode = "";
+        if(raiz.izquierdo  != null)
+            thisNode += raiz.izquierdo.elemento;
+        thisNode+= " , " + raiz.elemento  + " , ";
+        if(raiz.derecho !=null)
+            thisNode += raiz.derecho.elemento;
+        System.out.println(thisNode);
+        
+    }
+
+    /**
+     * Busca un elemento el el arbol
+     * @param elemento
+     * @param root
+     * @return true si el elemento está en el arbol
+     */
+    public boolean search(T elemento, Vertice root){
+        if(root == null)
+            return false;
+        if(elemento.compareTo(root.elemento) == 0)
+            return true;
+        if(elemento.compareTo(root.elemento) > 0 )
+            return search(elemento, root.derecho);
+        else
+            return search(elemento, root.izquierdo);
     }
 
 
-    
-    private void buildEmptyTree(Vertice root, int depth){
-        if(depth == 0)
-            return;
-        root.izquierdo = new Vertice(null);
-        buildEmptyTree(root.izquierdo, depth-1);
-        root.derecho = new Vertice(null);
-        buildEmptyTree(root.derecho, depth-1);
-    }
-
-    private void fillPreOrder(Vertice root, IteradorLista<T> it){
-        if(root.hayIzquierdo())
-            fillPreOrder(root.izquierdo, it);
-        if(it.hasNext())
-            root.elemento = it.next();
-        if(root.hayDerecho())
-            fillPreOrder(root.derecho, it);
-    }
-
-    private void buildSorted( Lista<T> lista) {
- 
-    }
 
     /**
      * Regresa un iterador para iterar el árbol. El árbol se itera en orden.
@@ -149,6 +175,11 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>> extends ArbolBinario<
         return inOrderTraversal( raiz);
     }
     
+    /**
+     * Funcion recursiva auxiliar que regresa un string con el recorrido in-order del arbol
+     * @param root
+     * @return
+     */
     private String inOrderTraversal( Vertice root){
         if(root == null)
             return "";
