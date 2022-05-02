@@ -342,7 +342,7 @@ public class Practica3 {
             arbol.insert(i);
             System.out.print(i +",");
         }
-        System.out.println("El arbol es: " + arbol);
+        System.out.println("\nEl arbol es: " + arbol);
         System.out.println("La altura del arbol es: " + arbol.altura());
         System.out.println("Se balancea el arbol");
         arbol.balance();
@@ -350,11 +350,13 @@ public class Practica3 {
         System.out.println("La altura del arbol es: " + arbol.altura());
         System.out.println("------------------------------------------------------");
 
+        System.out.println("Al arbol : " + arbol);
+        System.err.println("se le eliminan elementos 102,116,114,-17");
         arbol.delete(102);
         arbol.delete(116);
-        //arbol.delete(-17);
-        //arbol.delete(119);
-        System.out.println("El arbol es: " + arbol);
+        arbol.delete(114);
+        arbol.delete(-17);
+        System.out.println("El arbol resultante es: " + arbol);
     }
 
 }

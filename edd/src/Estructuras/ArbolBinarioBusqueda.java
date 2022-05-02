@@ -61,15 +61,15 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      * @param root
      * @return true si el elemento está en el arbol
      */
-    private boolean search(T elemento, Vertice root){
+    private boolean search(Vertice root, T elemento){
         if(root == null)
             return false;
         if(elemento.compareTo(root.elemento) == 0)
             return true;
         if(elemento.compareTo(root.elemento) > 0 )
-            return search(elemento, root.derecho);
+            return search( root.derecho, elemento);
         else
-            return search(elemento, root.izquierdo);
+            return search(root.izquierdo, elemento);
     }
 
      /**
@@ -95,7 +95,7 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      * @return true si el elemento está en el arbol
      */
     public boolean search(T elemento){
-        return search(elemento, raiz);
+        return search(raiz, elemento);
     }
 
     /**
@@ -123,12 +123,16 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         }
     }
 
+    public void insert(T elemento){
+        insert(raiz, elemento);
+    }
+
     /**
      * Inserta un elemento en el arbol de busqueda binaria
      * @param elemento
      */
-    public void insert(T elemento){
-        Vertice current = raiz;
+    public void insert(Vertice root, T elemento){
+        Vertice current = root;
         while(true){
             if(elemento.compareTo(current.elemento) == 0)
                 return;
@@ -159,11 +163,16 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
      * Balance the tree in O(n)
      * @param root
      */
-    public void balance(){
+    public void balance(Vertice root){
         Lista<T> lista = new Lista<T>();
-        getInOrderList(raiz, lista);//Generate a list of the elements in-order in O(n), this list is ordered
+        getInOrderList(root, lista);//Generate a list of the elements in-order in O(n), this list is ordered
         buildSorted(lista);//builds the tree with the sorted list in O(n)
     }
+
+    public void balance(){
+        balance(raiz);
+    }
+
 
      /**
      * Funcion recursiva auxiliar que regresa un string con el recorrido in-order del arbol
@@ -186,6 +195,10 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         return inOrderTraversal( raiz);
     }
 
+    public String toString(Vertice root){
+        return inOrderTraversal(root);
+    }
+
     @Override
     public Iterator iterator() {
         return null;
@@ -197,20 +210,24 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
     }
 
     @Override
-    public boolean delete(T elemento) {
-        Vertice toDelete  = getVertexWithElement(elemento, raiz);
+    public boolean delete(T elemento){
+        return delete(raiz, elemento);
+    }
+
+    public boolean delete(Vertice root, T elemento ) {
+        Vertice toDelete  = getVertexWithElement(elemento, root);
         //Caso en que el vertice a borrar no existe
         if(toDelete == null)
             return false;
         //Caso en el que el vertice a borrar no tiene hijos
         if(!toDelete.hayDerecho() && !toDelete.hayIzquierdo()){
+            toDelete = null;
             return true;
         }
         //Casos en que el vertice a borrar tiene mas de un hijo
         if(toDelete.hayDerecho() && toDelete.hayIzquierdo()){
             T  min = getMinimumAndDelete(toDelete.derecho);
             toDelete.elemento = min;
-            System.out.print("Caso dos hijos");
             return true;
         }
         //Casos en que el vertice a borrar  tiene solo  un hijo
@@ -219,7 +236,6 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
             toDelete.elemento = aux.elemento;
             toDelete.derecho = aux.derecho;
             toDelete.izquierdo = aux.izquierdo;
-            System.out.print("Caso hijo derecho");
             return true;
         }
         if(!toDelete.hayDerecho()&& toDelete.hayIzquierdo()){
@@ -227,7 +243,6 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
             toDelete.elemento = aux.elemento;
             toDelete.derecho = aux.derecho;
             toDelete.izquierdo = aux.izquierdo; 
-            System.out.print("Caso hijo izquierdo");
             return true;
         }
         return false;
