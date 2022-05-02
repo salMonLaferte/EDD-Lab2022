@@ -259,10 +259,16 @@ public class Practica3 {
     public static void main(String[] args) {
         System.out.println("Permutaciones de: ABC");
         permutacionesCadena("ABC");
+        System.out.println("------------------------------------------------------");
+
         System.out.println("Primos que suman P=7, S=100, N=4");
         primosQueSuman(100, 7, 4);
+        System.out.println("------------------------------------------------------");
+
         System.out.println("N reinas para  N=4");
         N_Reinas(4);
+        System.out.println("------------------------------------------------------");
+
         System.out.println("Suma cercana");
         Lista<Integer> lista = new Lista<>();
         lista.add(25);
@@ -281,24 +287,26 @@ public class Practica3 {
         sumaCercana(lista, 83);
         System.out.println("Los numeros cuya suma mas cercana es 24 son : ");
         sumaCercana(lista, 24);
+        System.out.println("------------------------------------------------------");
+
         System.out.println("La raiz cuadrada aproximada de 37 es: ");
         System.out.println(sqrtBusqBin(37));
         System.out.println("La raiz cuadrada aproximada de 263 es: ");
         System.out.println(sqrtBusqBin(263));
         System.out.println("La raiz cuadrada aproximada de 400 es: ");
         System.out.println(sqrtBusqBin(400));
-
+        System.out.println("------------------------------------------------------");
+       
         lista.empty();
         lista.add(1);
         lista.add(2);
         lista.add(3);
         lista.add(4);
         lista.add(5);
-
-
         System.out.println("Lista ordenada " + lista );
-        ArbolBinarioOrdenado<Integer> arbol = new ArbolBinarioOrdenado<>(lista, true) ;
+        ArbolBinarioBusqueda<Integer> arbol = new ArbolBinarioBusqueda<Integer>(lista, true) ;
         System.out.println("Arbol construido con lista ordenada: " + arbol);
+        System.out.println("------------------------------------------------------");
 
         lista.empty();
         lista.add(20);
@@ -307,13 +315,24 @@ public class Practica3 {
         lista.add(-9);
         lista.add(-17);
         lista.add(38);
-
         System.out.println("Lista no ordenada " + lista );
-        arbol = new ArbolBinarioOrdenado<>(lista, false) ;
+        arbol = new ArbolBinarioBusqueda<Integer>(lista, false) ;
         System.out.println("Arbol construido con lista no ordenada: " + arbol);
+        System.out.println("------------------------------------------------------");
 
-        System.out.println("Buscar -17 en la lista da : " + arbol.search(-17, arbol.raiz) );
-        System.out.println("Buscar 100 en la lista da : " + arbol.search(100, arbol.raiz) );
+        System.out.println("Buscar -17 en la lista da : " + arbol.search(-17) );
+        System.out.println("Buscar 100 en la lista da : " + arbol.search(100) ) ;
+        System.out.println("------------------------------------------------------");
+
+        System.out.println("Se inserta el elemento: " + 100);
+        arbol.insert(100);
+        System.out.println("El arbol es: " + arbol);
+        System.out.println("------------------------------------------------------");
+
+        System.out.println("Se inserta el elemento: " + 8);
+        arbol.insert(8);
+        System.out.println("El arbol es: " + arbol);
+        System.out.println("------------------------------------------------------");
 
     }
 
