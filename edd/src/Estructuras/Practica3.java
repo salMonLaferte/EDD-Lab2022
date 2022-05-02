@@ -256,6 +256,9 @@ public class Practica3 {
         return a;
     }
 
+    /**
+     * Pruebas de la practica
+     */
     public static void main(String[] args) {
         System.out.println("Permutaciones de: ABC");
         permutacionesCadena("ABC");
@@ -334,6 +337,17 @@ public class Practica3 {
         System.out.println("El arbol es: " + arbol);
         System.out.println("------------------------------------------------------");
 
+        System.out.println("Se agregan los siguientes elementos: ");
+        for(int i=101; i< 120; i++){
+            arbol.insert(i);
+            System.out.print(i +",");
+        }
+        System.out.println("El arbol es: " + arbol);
+        System.out.println("La altura del arbol es: " + arbol.altura());
+        System.out.println("Se balancea el arbol");
+        arbol.balance();
+        System.out.println("El arbol es: " + arbol);
+        System.out.println("La altura del arbol es: " + arbol.altura());
     }
 
 }

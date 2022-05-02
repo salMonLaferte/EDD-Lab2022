@@ -13,6 +13,7 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         else{
             buildUnsorted(lista);
         }
+        elementos = lista.size();
     }
 
     /**
@@ -118,6 +119,7 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
                 if(current.derecho == null){
                     Vertice toInsert = new Vertice(elemento);
                     current.derecho = toInsert;
+                    elementos++;
                     return;
                 }else{
                     current = current.derecho;
@@ -127,6 +129,7 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
                 if(current.izquierdo == null){
                     Vertice toInsert = new Vertice(elemento);
                     current.izquierdo = toInsert;
+                    elementos++;
                     return;
                 }else{
                     current = current.izquierdo;
@@ -135,10 +138,15 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         }
     }
 
-    public void balance(Vertice root){
-        
+    /**
+     * Balance the tree in O(n)
+     * @param root
+     */
+    public void balance(){
+        Lista<T> lista = new Lista<T>();
+        getInOrderList(raiz, lista);//Generate a list of the elements in-order in O(n), this list is ordered
+        buildSorted(lista);//builds the tree with the sorted list in O(n)
     }
-
 
      /**
      * Funcion recursiva auxiliar que regresa un string con el recorrido in-order del arbol
