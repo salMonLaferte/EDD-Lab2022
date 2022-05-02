@@ -72,6 +72,23 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
             return search(elemento, root.izquierdo);
     }
 
+     /**
+     * Busca revursivamente un elemento el el arbol binario de busqueda
+     * @param elemento
+     * @param root
+     * @return true si el elemento está en el arbol
+     */
+    private Vertice getVertexWithElement(T elemento, Vertice root){
+        if(root == null)
+            return null;
+        if(elemento.compareTo(root.elemento) == 0)
+            return root;
+        if(elemento.compareTo(root.elemento) > 0 )
+            return getVertexWithElement(elemento, root.derecho);
+        else
+            return getVertexWithElement(elemento, root.izquierdo);
+    }
+
     /**
      * Busca un elemento en el arbol
      * @param elemento
@@ -92,7 +109,7 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
     }
 
     /**
-     * Guarda los nodos en la lista list a partir de un recorrido in-order del arbol
+     * Guarda los elementos del arbol en la lista list a partir de un recorrido in-order del arbol
      * @param root
      * @param list
      */
@@ -171,7 +188,6 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
 
     @Override
     public Iterator iterator() {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -182,13 +198,63 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
 
     @Override
     public boolean delete(T elemento) {
-        // TODO Auto-generated method stub
+        Vertice toDelete  = getVertexWithElement(elemento, raiz);
+        //Caso en que el vertice a borrar no existe
+        if(toDelete == null)
+            return false;
+        //Caso en el que el vertice a borrar no tiene hijos
+        if(!toDelete.hayDerecho() && !toDelete.hayIzquierdo()){
+            return true;
+        }
+        //Casos en que el vertice a borrar tiene mas de un hijo
+        if(toDelete.hayDerecho() && toDelete.hayIzquierdo()){
+            T  min = getMinimumAndDelete(toDelete.derecho);
+            toDelete.elemento = min;
+            System.out.print("Caso dos hijos");
+            return true;
+        }
+        //Casos en que el vertice a borrar  tiene solo  un hijo
+        if(toDelete.hayDerecho()&& !toDelete.hayIzquierdo()){
+            Vertice aux =  toDelete.derecho;
+            toDelete.elemento = aux.elemento;
+            toDelete.derecho = aux.derecho;
+            toDelete.izquierdo = aux.izquierdo;
+            System.out.print("Caso hijo derecho");
+            return true;
+        }
+        if(!toDelete.hayDerecho()&& toDelete.hayIzquierdo()){
+            Vertice aux =  toDelete.izquierdo;
+            toDelete.elemento = aux.elemento;
+            toDelete.derecho = aux.derecho;
+            toDelete.izquierdo = aux.izquierdo; 
+            System.out.print("Caso hijo izquierdo");
+            return true;
+        }
         return false;
+    }
+    
+    /**
+     * Regresa el elemento minimo en el arbol y lo elimina
+     * @param root
+     * @return
+     */
+    private T getMinimumAndDelete(Vertice root){
+        if(root.izquierdo == null){
+            T aux = root.elemento;
+            root = null;
+            return aux;
+        }
+        if(root.izquierdo.izquierdo == null){
+            T aux = root.izquierdo.elemento;
+            root.izquierdo = null;
+            return aux;
+        }
+        else return getMinimumAndDelete(root.izquierdo);
     }
 
     @Override
     public T pop() {
-        // TODO Auto-generated method stub
+        delete(raiz.elemento);
         return null;
     }
     

@@ -348,6 +348,13 @@ public class Practica3 {
         arbol.balance();
         System.out.println("El arbol es: " + arbol);
         System.out.println("La altura del arbol es: " + arbol.altura());
+        System.out.println("------------------------------------------------------");
+
+        arbol.delete(102);
+        arbol.delete(116);
+        //arbol.delete(-17);
+        //arbol.delete(119);
+        System.out.println("El arbol es: " + arbol);
     }
 
 }
