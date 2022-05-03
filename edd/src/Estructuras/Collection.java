@@ -26,7 +26,7 @@ public interface Collection<T> extends Iterable<T> {
      * 
      * @return El elemento a sacar.
      */
-    public T pop();
+    //public T pop();
 
     /**
      * Regresa el número de elementos en la colección.

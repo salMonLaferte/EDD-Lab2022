@@ -127,6 +127,11 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
         return (int) Math.floor(Math.log(elementos) / Math.log(2));
     }
     
+    public boolean delete(T elemento){
+        return false;
+    }
+    
+   
     /**
      * Regresa un iterador para iterar el árbol. El árbol se itera en orden BFS.
      * 
@@ -136,6 +141,8 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
     public Iterator<T> iterator() {
         return new Iterador();
     }
+
+  
 
 
 
