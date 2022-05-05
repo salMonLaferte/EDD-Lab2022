@@ -135,9 +135,72 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
         // Caso 4
         // Caso 5
     }
-    //tiene2hijos
-    //hasAbuelo
-    //getAbuelo
+
+    //Saber si un vertice tiene 2 hijos
+    private boolean tiene2hijos(VerticeRojinegro v){
+
+    
+    }
+
+
+    private boolean hasAbuelo(VerticeRojinegro v){
+
+    }
+
+    private VerticeRojinegro getAbuelo(VerticeRojinegro v) {
+
+    }
+
+    private VerticeRojinegro getPadre(VerticeRojinegro v) {
+
+    }
+
+    private boolean hasTio(VerticeRojinegro v) {
+
+    }
+
+    private VerticeRojinegro getTio(VerticeRojinegro v) {
+
+    }
+
+    private boolean isLeft(VerticeRojinegro v) {
+
+    }
+
+    private boolean isDerecho(VerticeRojinegro v) {
+
+    }
+
+    
+
+    private boolean hasHermano(VerticeRojinegro v) {
+
+    }
+
+    // Si es derecho -> devuelve el izq
+    // Si es Izq -> devuelve el der
+    private VerticeRojinegro getHermano(VerticeRojinegro v) {
+
+    }
+
+    //v.padre es izq y v es derecho.
+    private boolean cruzadosIzq(VerticeRojinegro v){
+
+    }
+
+    // v.padre es der y v es izq.
+    private boolean cruzadosDer(VerticeRojinegro v) {
+
+    }
+
+    private boolean isRojo(){
+
+    }
+
+    private boolean isNegro(){
+        
+    }
+
 
 
     /**
