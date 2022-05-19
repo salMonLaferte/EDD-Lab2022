@@ -68,6 +68,7 @@ public interface Collection<T> extends Iterable<T> {
      */
     public boolean equals(Object o);
 
+
     /**
      * Regresa una representación en cadena de la coleccion.
      * 
