@@ -152,53 +152,53 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
     }
 
     private VerticeRojinegro getPadre(VerticeRojinegro v) {
-
+        
     }
 
     private boolean hasTio(VerticeRojinegro v) {
-
+        return ;
     }
 
     private VerticeRojinegro getTio(VerticeRojinegro v) {
-
+        return;
     }
 
     private boolean isLeft(VerticeRojinegro v) {
-
+        return;
     }
 
     private boolean isDerecho(VerticeRojinegro v) {
-
-    }
+        return;
+    }   
 
     
 
     private boolean hasHermano(VerticeRojinegro v) {
-
+        return;
     }
 
     // Si es derecho -> devuelve el izq
     // Si es Izq -> devuelve el der
     private VerticeRojinegro getHermano(VerticeRojinegro v) {
-
+        return;
     }
 
     //v.padre es izq y v es derecho.
     private boolean cruzadosIzq(VerticeRojinegro v){
-
+        return;
     }
 
     // v.padre es der y v es izq.
     private boolean cruzadosDer(VerticeRojinegro v) {
-
+        return;
     }
 
     private boolean isRojo(){
-
+        return;
     }
 
     private boolean isNegro(){
-        
+        return;
     }
 
 

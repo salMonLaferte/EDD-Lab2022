@@ -1,10 +1,12 @@
 package edd.src.Estructuras;
 
-public class Pokemon  {
+public class Pokemon implements ComparableIndexable<Pokemon>{
     String nombre;
     String tipo;
     int nivel;
+    int indice;
     int hp;
+    
 
     public Pokemon(String nombre, String tipo, int nivel, int hp) {
         this.nombre = nombre;
@@ -23,4 +25,20 @@ public class Pokemon  {
         return "nombre=" + nombre ;
     }
     
+    @Override
+    public int compareTo(Pokemon otro) {
+        return this.nombre.compareTo(otro.nombre);
+    }
+    
+    @Override
+    public int getIndice() {
+        return this.indice;
+    }
+
+    @Override
+    public void setIndice(int indice) {
+        this.indice = indice;
+    }
+
+
 }
